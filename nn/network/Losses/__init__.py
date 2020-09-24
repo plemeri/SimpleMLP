@@ -1,2 +1,2 @@
-from L2loss import *
-from Loss import *
+from .L2loss import *
+from .Loss import *

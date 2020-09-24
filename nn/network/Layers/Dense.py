@@ -17,8 +17,8 @@ class Dense(Layer):
             self.weight_checkpoint_dir = self.checkpoint_dir + '/' + self.scope + '_weight'
             self.bias_checkpoint_dir = self.checkpoint_dir + '/' + self.scope + '_bias'
 
-    def visualize(self):
-        print('dense layer -', self.scope, 'in_dimension: ', self.in_dimension, 'out_dimension :', self.out_dimension)
+    def __str__(self):
+        return 'dense layer: ' + str(self.scope) + ' --> '  + 'in_dimension: ' + str(self.in_dimension) + ', out_dimension: ' + str(self.out_dimension) + '\n'
 
     def load(self):
         self.weight = np.load(self.weight_checkpoint_dir + '.npy')

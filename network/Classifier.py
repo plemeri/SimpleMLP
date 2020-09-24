@@ -10,25 +10,26 @@ class Classifier(Model):
         out, loss = super().train()
         acc = accuracy(out, self.train_label)
         if verbose is True:
-            print('train_loss: ', loss, 'train accuracy: ', acc)
+            print('train_loss: {0:2f}, train_accuracy: {1}'.format(loss, acc), end='')
 
     def fit(self, verbose_step=50):
         best_acc = 0
         for i in range(self.epochs):
             if i % verbose_step == 0:
-                print('epoch: ', i + 1, " ", end="")
+                print('\repoch: {0} '.format(i + 1), end='')
             self.train(not(i % verbose_step))
             acc = self.validation(verbose=False)
             if acc > best_acc:
                 best_acc = acc
-                print("saving best model - " + str(best_acc))
                 self.save()
+        self.validation()
+        print("\ndone")
 
     def validation(self, verbose=True):
         out, loss = super().validation()
         acc = accuracy(out, self.validation_label)
         if verbose is True:
-            print('validation_loss: ', loss, 'validation accuracy: ', acc)
+            print('\nvalidation_loss: ', loss, 'validation accuracy: ', acc)
         return acc
 
     def predict(self, test_dataset, *args, **kwargs):

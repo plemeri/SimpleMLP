@@ -6,8 +6,13 @@ from dataset.Loader import *
 
 def Mlp(args):
     loader_spec = (args.feature_num, args.class_num)
-    train_dataset = Loader(args.train_data_dir, *loader_spec, data_num=args.train_data_num)
-    validation_dataset = Loader(args.validation_data_dir, *loader_spec, data_num=args.validation_data_num)
+
+    if args.mode == 'train':
+        train_dataset = Loader(args.train_data_dir, *loader_spec, data_num=args.train_data_num)
+        validation_dataset = Loader(args.validation_data_dir, *loader_spec, data_num=args.validation_data_num)
+    else:
+        train_dataset = None
+        validation_dataset = None
 
     model = Classifier(train_dataset, validation_dataset, L2Loss(), accuracy, args.epochs, args.learning_rate)
 

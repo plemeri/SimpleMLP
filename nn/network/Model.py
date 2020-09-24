@@ -3,14 +3,15 @@ class Model:
         self.layers = []
         self.loss = Loss
         self.train_dataset = train_dataset
-        self.train_dataset = train_dataset
         self.validation_dataset = validation_dataset
         self.criteria = criteria
         self.epochs = epochs
         self.learning_rate = learning_rate
 
-        self.train_data, self.train_label = self.read_dataset(self.train_dataset)
-        self.validation_data, self.validation_label = self.read_dataset(self.validation_dataset)
+        if self.train_dataset is not None:
+            self.train_data, self.train_label = self.read_dataset(self.train_dataset)
+        if self.validation_dataset is not None:
+            self.validation_data, self.validation_label = self.read_dataset(self.validation_dataset)
 
     def read_dataset(self, dataset, *args, **kwargs):
         dataset.read()
@@ -19,11 +20,13 @@ class Model:
     def append_layer(self, layer, *args, **kwargs):
         self.layers.append(layer)
 
-    def visualize(self):
-        print('====================================================')
+    def __str__(self):
+        out = ""
+        out += "=" * 80 + "\n"
         for i, layer_ in enumerate(self.layers):
-            layer_.visualize()
-        print('====================================================')
+            out += layer_.__str__()
+        out += "=" * 80 + "\n"
+        return out
 
     def save(self, *args, **kwargs):
         for layer in self.layers:
