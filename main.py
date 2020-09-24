@@ -4,7 +4,7 @@ from dataset.Loader import *
 
 def args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--mode', type=str, default='validation', choices=['train', 'validation', 'test'])
+    parser.add_argument('--mode', type=str, default='train', choices=['train', 'validation', 'test'])
     parser.add_argument('--feature_num', type=int, default=2)
     parser.add_argument('--class_num', type=int, default=2)
     parser.add_argument('--hidden_layer_num', type=int, default=1)
@@ -18,7 +18,7 @@ def args():
     parser.add_argument('--test_data_dir', type=str, default='./dataset/custom_two_moon/custom_two_moon_test.txt')
     parser.add_argument('--test_data_num', type=int, default=200)
     parser.add_argument('--test_output_dir', type=str, default='./result.txt')
-    parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint/two_moon')
+    parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint/custom_two_moon')
     return parser.parse_args()
 
 

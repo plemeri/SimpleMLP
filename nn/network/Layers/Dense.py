@@ -25,10 +25,11 @@ class Dense(Layer):
         self.bias = np.load(self.bias_checkpoint_dir + '.npy')
 
     def save(self):
-        if os.path.isdir(self.checkpoint_dir) is False:
-            os.makedirs(self.checkpoint_dir)
-        np.save(self.weight_checkpoint_dir, self.weight)
-        np.save(self.bias_checkpoint_dir, self.bias)
+        if self.checkpoint_dir is not None:
+            if os.path.isdir(self.checkpoint_dir) is False:
+                os.makedirs(self.checkpoint_dir)
+            np.save(self.weight_checkpoint_dir, self.weight)
+            np.save(self.bias_checkpoint_dir, self.bias)
 
     def forward(self, inputs):
         self.inputs = inputs
